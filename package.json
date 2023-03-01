@@ -6,8 +6,9 @@
     "start": "npm run dev",
     "dev": "vite --host",
     "build": "vue-tsc --noEmit && vite build",
+    "build:no-check": "vite build",
     "preview": "vite preview",
-    "largeFileUpload": "npm start & nodemon server/server.js"
+    "largeFileUpload": "npm start & nodemon server/largeFileServer/server.js"
   },
   "dependencies": {
     "vue": "^3.2.25"
