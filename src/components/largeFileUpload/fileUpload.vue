@@ -38,6 +38,9 @@
 <script lang="ts" setup>
 import {reactive, ref, computed, watch} from 'vue'
 import {Sheduler} from './sheduler'
+import {wconsole as console} from './wconsole.js'
+
+console.log('222')
 
 // const url = 'http://localhost:3005'
 const url = 'http://192.168.31.158:3005'
