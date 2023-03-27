@@ -15,6 +15,15 @@ function throttle(fn:Function, time:number) {
     }, time)
   }
 }
+function getViewportWidth() {
+  return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+}
+
+export function pxToVw(px: number) {
+  const vw = getViewportWidth()
+  const result = ((px / vw)*100).toFixed(3) + 'vw'
+  return result
+}
 
 export {
   throttle
