@@ -30,3 +30,5 @@ stats.html
 /server/largeFileServer/target
 ## node 静态资源服务
 /server/staticResourceServer/static
+# jest单元测试结果目录
+/coverage
