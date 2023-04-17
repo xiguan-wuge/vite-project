@@ -1,5 +1,5 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
-import {pagePermission} from '@/permission/index.ts'
+import {pagePermission} from '@/permission/index'
 
 const HelloWorld = () => import('@/components/HelloWorld.vue')
 const NoPermission= () => import('@/components/403.vue')
@@ -50,6 +50,11 @@ const list = [
     path: '/mock',
     name: 'Mock',
     component: Mock
+  },
+  {
+    path: '/waterMark',
+    name: 'WaterMark',
+    component: () => import('@/components/waterMark/demo.vue')
   },
 ]
 
