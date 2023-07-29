@@ -97,7 +97,7 @@ watch(
 // 处理input change 事件
 const fileSize = ref('0')
 // 将文件大小（bit）转换成对应的单位（KB | M）
-function checkFileSize(size) {
+function checkFileSize(size:number) {
   let val = '0'
   if(size < 1000) {
     val = size + '字节'

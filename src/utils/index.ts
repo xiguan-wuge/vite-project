@@ -24,7 +24,15 @@ export function pxToVw(px: number) {
   const result = ((px / vw)*100).toFixed(3) + 'vw'
   return result
 }
+const us = navigator.userAgent
 
+/**
+ * 判断真机环境，排除pc浏览器中的真机模拟器
+ * @returns 
+ */
+export function checkInRealMobile() {
+  return !(us.indexOf('Mac OS') > -1)
+}
 export {
   throttle
 }

@@ -13,6 +13,11 @@ const typeList = {
 
 const server = http.createServer((req, res) => {
   console.log('url', req.url);
+  if(req.url === '/' || req.url === '') {
+    res.setHeader ("Content-Type", "text/html;charset=utf8");
+    res.statusCode = 200
+    res.end('<h1>静态资源服务页</h1>')
+  }
   const url = req.url === '/' ? '/index.html' : req.url
   const filePath = path.join(__dirname, 'static', url)
   fs.readFile(filePath, (err, data) => {

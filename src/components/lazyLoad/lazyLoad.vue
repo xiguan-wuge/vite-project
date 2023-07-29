@@ -9,11 +9,11 @@
 
 <script lang="ts" setup>
 import {ref, onMounted} from 'vue'
-import {list, defaultImg} from './list.js'
+import {list, defaultImg} from './list'
 import tempImg from '@/assets/tempImg.svg'
 onMounted(() => {
   // const root = document.querySelector('.lazy-load')
-  const root = document.querySelector('body')
+  const root = document.querySelector('.img-item')
   console.log('root', root);
   const options = {
     root: root,

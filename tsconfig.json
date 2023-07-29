@@ -13,6 +13,6 @@
     "lib": ["esnext", "dom"],
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/test/hello/hello.spec.js", "src/test/hello/hello.js"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/test/hello/hello.spec.js", "src/test/hello/hello.js", "src/vue-rewrite/mini-vuex.js", "src/vue-rewrite/mini-router.js"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

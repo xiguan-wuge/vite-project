@@ -14,7 +14,7 @@ import {onMounted, reactive, ref} from 'vue'
 import {throttle} from '@/utils/index'
 
 // 总数据
-const resultData = (new Array(200).fill(1).map((item, index) => index + 1))
+const resultData = (new Array(20000).fill(1).map((item, index) => index + 1))
 // 缓冲个数
 const overScan = 5
 // 展示的数据
@@ -26,13 +26,13 @@ const visibleCount = ref(0)
 const itemHeight = 50
 const noMore = ref(false)
 
+// 总高度
+const totalHeight = resultData.length * itemHeight
 // 截取数据
 const caculateRangeData = () => {
   // 计算偏移的数量
   const offsetCount = Math.floor(wrapper.value.scrollTop / itemHeight) + 1
   console.log('offsetCount', offsetCount)
-  // 总高度
-  const totalHeight = resultData.length * itemHeight
   // 开始索引
   const start = Math.max(0, offsetCount - overScan)
   console.log('start', start);

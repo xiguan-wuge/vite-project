@@ -19,7 +19,7 @@ describe('should get hello world', () => {
     expect(bar()).toBeFalsy() // 测试返回falsy
   })
   test('is hello', () => {
-    expect(hello()).toBe('hello world！!')
+    expect(hello()).toBe('hello world!2')
   })
 
   // 后处理-all 

@@ -1,5 +1,7 @@
 <template>
   <div class="container">
+    <!-- <van-button type="primary" >vant button</van-button> -->
+    <!-- <var-button type="primary">主要按钮</var-button> -->
     <div class="img-wraper">
       <img
         v-water-mask:options="wmOption"
@@ -15,6 +17,14 @@
         alt=""
       />
     </div>
+    <div>
+      <img
+        class="demo2"
+        src="https://img2.woyaogexing.com/2023/03/12/d3fb4d961ea7f01e70b345f88e919050.jpg"
+        alt=""
+      />
+    </div>
+    <div class="demo2"></div>
   </div>
 </template>
 
@@ -46,5 +56,17 @@ const wmOption = reactive({
 img {
   width: 100%;
   height: auto;
+}
+.demo2::after {
+  content: "后缀";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 14px;
+  color: red;
+  z-index: 30;
+  width: 100%;
+  height: 20px;
 }
 </style>

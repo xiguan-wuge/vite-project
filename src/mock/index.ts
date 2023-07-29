@@ -3,7 +3,7 @@
  */
 import Mock from 'mockjs'
 import {baseURL} from '@/api/index'
-console.log('baseURL', baseURL);
+// console.log('baseURL', baseURL);
 
 let configArray:any[] = []
 export function initMock() {
@@ -23,14 +23,14 @@ export function initMock() {
       configArray.push(item.default)
     }
   }
-  console.log('configArray', configArray);
+  // console.log('configArray', configArray);
 
   configArray.forEach(item => {
     for(let [path, target] of Object.entries(item)) {
-      console.log('path', path);
-      console.log('target', target);
+      // console.log('path', path);
+      // console.log('target', target);
       const protocol = path.split('|')
-      console.log('protocol', protocol);
+      // console.log('protocol', protocol);
       
       Mock.mock(new RegExp('^' + baseURL+protocol[1]), protocol[0], target);
 
@@ -38,4 +38,6 @@ export function initMock() {
   })
   
 }
+
+// export default initMock
 

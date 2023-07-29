@@ -20,8 +20,8 @@
   </div>
 </template>
 <script lang="ts" setup>
-import {ref, onMounted, onBeforeUnmount, reactive} from 'vue'
-import {pxToVw} from '@/utils/index.ts'
+import {ref, onMounted, onBeforeUnmount, reactive, Ref} from 'vue'
+import {pxToVw} from '../../utils/index'
 
 const bulletList = [
   '1adkajlj安利大家来看',
@@ -46,8 +46,11 @@ const bulletList = [
   '19按客户可结案的痕迹卡得很',
   '20按客户可结顶顶顶顶案的痕迹卡得很',
 ]
-
-const showList = ref([])
+type listItem = {
+  enter: boolean
+  text: string
+}
+const showList = ref<listItem[]>([])
 const showList2 = ref([
   {
     enter: false,
@@ -118,15 +121,23 @@ showList.value = bulletList.map(item => {
   }
 })
 
-let IO = {}
-let bulletTimer = null
+type IOType = {
+  observe: Function
+  disconnect: Function
+
+}
+let IO:IOType = {
+  observe: ()=>{},
+  disconnect: () => {}
+}
+let bulletTimer: number | null = null
 onMounted(() => {
   console.log('200vw', pxToVw(200))
   // return
 
-  const bulletEl = document.querySelector('#bullet')
+  const bulletEl:HTMLElement = document.querySelector('#bullet')
   const bulletElHeight = bulletEl.clientHeight
-  const contentEl = document.querySelector('#content')
+  const contentEl:HTMLElement = document.querySelector('#content')
   const contentElHeight = contentEl.clientHeight
   // console.log('contentElHeight', contentElHeight);
   
@@ -146,7 +157,7 @@ onMounted(() => {
   // }
 
 
-  function addAnimation(key, isShow) {
+  function addAnimation(key:string, isShow:boolean) {
     for(let i = 0, len = showList.value.length; i < len; i++) {
       const item = showList.value[i]
       if(item.text === key) {
@@ -158,7 +169,7 @@ onMounted(() => {
   IO = new IntersectionObserver(
     (entries) => {
       // console.log('entries', entries)
-      entries.forEach((item, index) => {
+      entries.forEach((item) => {
         // console.log(index, item);
         const key = item.target.__vnode.key
         // console.log('key', key);
@@ -181,7 +192,7 @@ onMounted(() => {
       // console.log('-');
       marginTop.value -= 2
       if(bulletTimer) clearTimeout(bulletTimer)
-      bulletTimer = setTimeout(fn, 30)
+      bulletTimer = window.setTimeout(fn, 30)
     } else {
       // console.log('else');
       marginTop.value = bulletElHeight
