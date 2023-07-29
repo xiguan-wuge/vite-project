@@ -28,3 +28,5 @@ jobs:
           BRANCH: gh-pages # github page指定分支
           FOLDER: dist # build后生成的目录
           clean: true
+          ACCESS_TOKEN: ${{ secrets.VITE_PROJECT_SECRET }} #  secret 名称
+          TARGET_FOLDER: vite-project # 打包的文件将放到静态服务器
