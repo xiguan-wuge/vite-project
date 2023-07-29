@@ -8,6 +8,7 @@ const BulletLoop= () => import('@/components/bulletLoop/bulletLoop.vue')
 const PullLoad= () => import('@/components/pullLoad/pullLoad.vue')
 const VirtualList= () => import('@/components/virtualList/virtualList.vue')
 const Mock= () => import('@/components/mock/mock.vue')
+const I18n = () => import('@/language/demo/demo.vue')
 const list = [
   // {
   //   path: '/',
@@ -56,6 +57,11 @@ const list = [
     name: 'WaterMark',
     component: () => import('@/components/waterMark/demo.vue')
   },
+  {
+    path: '/i18n',
+    name: 'I18n',
+    component: I18n
+  }
 ]
 
 const router = createRouter({
