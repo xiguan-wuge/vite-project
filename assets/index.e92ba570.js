@@ -1,0 +1,1 @@
+function u(e,n){let t=null,i=this;return function(){t||(t=setTimeout(()=>{e.apply(i,[...arguments]),clearTimeout(t),t=null},n))}}function o(){return window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth}function r(e){const n=o();return(e/n*100).toFixed(3)+"vw"}export{r as p,u as t};

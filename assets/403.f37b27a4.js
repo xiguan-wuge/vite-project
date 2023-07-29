@@ -1,0 +1,1 @@
+import{d as u,a as t,c as o,i as e,b as s}from"./index.2e50bfa5.js";const n=e("\u62B1\u6B49\uFF0C\u60A8\u6CA1\u6709\u8BBF\u95EE\u6743\u9650"),_=s("br",null,null,-1),a=e("\u8BF7\u8FD4\u56DE\u4E0A\u4E00\u7EA7"),c=[n,_,a],B=u({__name:"403",setup(r){return(d,l)=>(t(),o("div",null,c))}});export{B as default};
