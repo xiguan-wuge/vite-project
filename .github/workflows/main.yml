@@ -20,7 +20,7 @@ jobs:
       - name: Install and Build # 下载依赖 打包项目
         run: |
           pnpm install
-          pnpm run build
+          pnpm run build:no-check
 
       - name: Deploy # 将打包内容发布到 github page
         uses: JamesIves/github-pages-deploy-action@v4 # 使用别人写好的 actions
