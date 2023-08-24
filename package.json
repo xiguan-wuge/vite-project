@@ -9,7 +9,8 @@
     "build:no-check": "vite build",
     "preview": "vite preview",
     "largeFileUpload": "npm start & nodemon server/largeFileServer/server.js",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest --coverage"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --coverage",
+    "static-server": "nodemon ./server/staticResourceServer/server.js"
   },
   "dependencies": {
     "@varlet/ui": "^2.10.0",

@@ -8,15 +8,51 @@ const typeList = {
   '.jpg': 'image/jpg',
   '.html': 'text/html;charset=utf-8',
   '.js': 'application/javascript;charset=utf-8',
-  '.css': 'text/css;charset=utf-8'
+  '.css': 'text/css;charset=utf-8',
+  '.svg':  'image/svg+xml'
 }
+const host = 'http://localhost'
+const port = 8090
 
+// 读取static下的项目列表
+function getProjectList() {
+  return new Promise((resolve, reject) => {
+    const dir = path.join(__dirname, 'static')
+    fs.readdir(dir, (err, data) => {
+      if(err) {
+        reject(err)
+      }else {
+        resolve(data)
+      }
+    })
+  })
+  
+}
 const server = http.createServer((req, res) => {
-  console.log('url', req.url);
   if(req.url === '/' || req.url === '') {
+  getProjectList().then(data => {
+    const list = `<ul>
+    ${data.map(item => {
+      return `<li>
+      <a href="${host}:${port}/${item}/index.html">${item}</a>
+      </li>`
+    }).join('')}
+    </ul>`
     res.setHeader ("Content-Type", "text/html;charset=utf8");
     res.statusCode = 200
-    res.end('<h1>静态资源服务页</h1>')
+    res.end(`
+    <h1>静态资源服务页</h1>
+    </br>
+    <h2>当前项目列表</h2>
+    ${list}
+    `)
+  }).catch((err) => {
+    console.log('getProjectList-err', err);
+    res.setHeader ("Content-Type", "text/html;charset=utf8");
+    res.statusCode = 200
+    res.end(`<h1>静态资源服务页</h1>`)
+  })
+    return
   }
   const url = req.url === '/' ? '/index.html' : req.url
   const filePath = path.join(__dirname, 'static', url)
@@ -44,6 +80,6 @@ const server = http.createServer((req, res) => {
     }
   })
 })
-server.listen(8090, () => {
-  console.log(`server run at: http:localhost:8090`)
+server.listen(port, () => {
+  console.log(`server run at: ${host}:${port}`)
 })
