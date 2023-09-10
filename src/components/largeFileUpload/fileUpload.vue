@@ -9,6 +9,8 @@
     &nbsp;&nbsp;
     <button @click="handleDelete">delete</button>
     &nbsp;&nbsp;
+    <br/><br/>
+    <button @click="handleNormalUpload">normal upload</button>
 
     <div class="caculate-percentage">
       <h3>上传进度</h3>
@@ -35,16 +37,18 @@
     </div>
   </div>
 </template>
-<script lang="ts" setup>
+<script setup>
 import {reactive, ref, computed, watch} from 'vue'
 import {Sheduler} from './sheduler'
-import {wconsole as console} from './wconsole.js'
-
-console.log('222')
 
 // const url = 'http://localhost:3005'
 const url = 'http://192.168.31.158:3005'
-const SIZE = 10 * 1024 * 1024
+const chunkSize = 10 * 1024 * 1024
+const maxFileSize = 10000000 * 1024 * 1024
+let SIZE = chunkSize
+const chunkTimeout = 20 * 1000
+const maxFileTimeout = 1000 * 1000
+let Timeout = chunkTimeout
 const Status = {
   wait: 'wait',
   pause: 'pause',
@@ -97,7 +101,7 @@ watch(
 // 处理input change 事件
 const fileSize = ref('0')
 // 将文件大小（bit）转换成对应的单位（KB | M）
-function checkFileSize(size:number) {
+function checkFileSize(size) {
   let val = '0'
   if(size < 1000) {
     val = size + '字节'
@@ -125,7 +129,18 @@ function handleFileChange(e) {
 
 let fileChunkList = [] // 暂存文件chunk，续传时，减少重复生成
 const createFileChunkTime = ref(0)
-async function handleUpload() {
+async function handleUpload(isNormal) {
+  console.log('handleUpload');
+  if(!isNormal) {
+    // 切片上传
+    SIZE = chunkSize
+    Timeout = chunkTimeout
+  } else {
+    // 普通上传
+    SIZE = maxFileSize
+    Timeout = maxFileTimeout
+  }
+  
   if(!container.file) return
   // status.value = Status.uploading
   // 优化，未重新选择文件或者续传时 ，不用再生成文件hash
@@ -139,7 +154,6 @@ async function handleUpload() {
     isNewFile.value = false
   }
   hasPuased.value = false
-  
   
   // 判断是否已经上传过了
   const {shouldUpload, uploadedList} = await verifyUpload(
@@ -171,7 +185,11 @@ async function handleUpload() {
 // 生成文件hash 采用webWorker
 function caculateHash(fileChunkList) {
   return new Promise(resolve => {
-    container.worker = new Worker('/hash.js')
+    // container.worker = new Worker('/hash.js')
+    const hashFilePath = new URL('./hash.js', import.meta.url).href
+    
+    container.worker = new Worker(hashFilePath)
+    
     // console.log('container.worker', container.worker)
     container.worker.postMessage({fileChunkList})
     container.worker.onmessage = e => {
@@ -231,8 +249,9 @@ function request({
   onProcess = e => e,
   requestList
 }) {
-  return new Promise(resolve => {
+  return new Promise((resolve,reject) => {
     const xhr = new XMLHttpRequest()
+    xhr.timeout = Timeout
     xhr.upload.onprogress = onProcess
     xhr.open(method, url)
     Object.keys(headers).forEach(key => {
@@ -250,6 +269,15 @@ function request({
       resolve({
         data: e.target.response
       })
+    }
+    // 断网触发超时异常检测
+    xhr.ontimeout = (err) => {
+      console.log('xhr-ontimeout', err);
+      reject(err)
+    }
+    xhr.onerror = (err) => {
+      console.log('xhr-err', err);
+      reject(err)
     }
 
     // 暴露当前 xhr 给外部，以便后续的暂停
@@ -310,8 +338,7 @@ async function uploadChunks(uploadedList = []) {
   // 发送上传请求，并发控制
   onUploading.value = true
 
-  await sendUploadReqest(requestListTemp)
-  onUploading.value = false
+   const res = await sendUploadReqest(requestListTemp)
   const endTime = Date.now()
   uploadFileTime.value = endTime - startTime
   console.warn('uploadFileTime', uploadFileTime.value)
@@ -369,6 +396,26 @@ async function handleDelete() {
   if(JSON.parse(data).code === 0) {
     alert('删除成功！')
   }
+}
+
+// 普通上传
+function handleNormalUpload() {
+  handleUpload(true)
+  // const formData = new FormData()
+  // console.log('container', container);
+  //     formData.append('chunk', container.file)
+  //     formData.append('hash', container.hash)
+  //     formData.append('filename', container.file.name)
+  //     formData.append('fileHash', container.hash)
+
+  //     request({
+  //         url: url,
+  //         method: 'post',
+  //         data: formData,
+  //         headers: {},
+  //         onProcess: createProgressHandler(fileData.value[index]),
+  //         requestList: requestList
+  //       })
 }
 </script>
 <style lang="less" scoped>
