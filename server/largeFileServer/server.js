@@ -13,6 +13,7 @@ server.on('request', async (req, res) => {
 
   if(req.method === 'OPTIONS') {
     res.status = 200
+    res.setHeader('cache-control', 'max-age=200000')
     res.end()
     return
   }

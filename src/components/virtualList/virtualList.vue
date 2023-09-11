@@ -9,7 +9,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import {onMounted, reactive, ref} from 'vue'
 import {throttle} from '@/utils/index'
 

@@ -12,7 +12,7 @@ declare module '@vue/runtime-core' {
     403: typeof import('./src/components/403.vue')['default']
     Bullet: typeof import('./src/components/bullet.vue')['default']
     BulletLoop: typeof import('./src/components/bulletLoop/bulletLoop.vue')['default']
-    Demo: typeof import('./src/components/waterMark/demo.vue')['default']
+    Demo: typeof import('./src/components/swipe/demo.vue')['default']
     FileUpload: typeof import('./src/components/largeFileUpload/fileUpload.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     LazyLoad: typeof import('./src/components/lazyLoad/lazyLoad.vue')['default']
@@ -21,7 +21,10 @@ declare module '@vue/runtime-core' {
     PullLoad: typeof import('./src/components/pullLoad/pullLoad.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Swipe: typeof import('./src/components/swipe/swipe.vue')['default']
     Switch: typeof import('./src/components/switch/switch.vue')['default']
+    VanSwipe: typeof import('vant/es')['Swipe']
+    VanSwipeItem: typeof import('vant/es')['SwipeItem']
     VirtualList: typeof import('./src/components/virtualList/virtualList.vue')['default']
   }
 }

@@ -7,7 +7,7 @@ import {viteMockServe} from 'vite-plugin-mock'
 import postcssPxToViewport from "postcss-px-to-viewport"
 import uglifyHtmlPlugin from './src/plugins/uglifyHtmlPlugin/index.ts'
 import Components from 'unplugin-vue-components/vite';
-import { VantResolver, VarletUIResolver } from 'unplugin-vue-components/resolvers';
+import { VantResolver } from 'unplugin-vue-components/resolvers';
 // import { VarletUIResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vitejs.dev/config/
@@ -30,14 +30,12 @@ export default defineConfig({
     uglifyHtmlPlugin(),
     Components({
       resolvers: [
-        // VantResolver({
-        //   importStyle: 'less'
-        // })
-        VarletUIResolver(
-          {
-            importStyle: 'less'
-          }
-        )
+        VantResolver()
+        // VarletUIResolver(
+        //   {
+        //     importStyle: 'less'
+        //   }
+        // )
       ],
     }),
     

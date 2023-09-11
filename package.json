@@ -3,12 +3,12 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "start": "npm run dev",
+    "start": "pnpm run dev",
     "dev": "vite --host",
     "build": "vue-tsc --noEmit && vite build",
     "build:no-check": "vite build",
     "preview": "vite preview",
-    "largeFileUpload": "npm start & nodemon server/largeFileServer/server.js",
+    "largeFileUpload": "pnpm start & nodemon server/largeFileServer/server.js",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --coverage",
     "static-server": "nodemon ./server/staticResourceServer/server.js"
   },
@@ -36,6 +36,7 @@
     "unplugin-vue-components": "^0.24.1",
     "vite": "^2.9.9",
     "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-http2": "^1.0.15",
     "vite-plugin-mock": "^2.9.6",
     "vue-router": "4",
     "vue-tsc": "^0.34.7"

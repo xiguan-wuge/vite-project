@@ -1,4 +1,4 @@
-import {ref, inject, computed, defineProps} from 'vue'
+import {ref, inject, computed} from 'vue'
 
 const ROUTER_KEY = '__router__'
 

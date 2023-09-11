@@ -7,19 +7,22 @@ import i18n from './language'
 
 // 按需引入 mock和vconsole
 if(process.env.NODE_ENV !== 'production') {
-  import('./mock')
-    .then(module => {
-      module.initMock()
-    }).catch(err => {
-      console.log('mock-error', err);
-    })
-  import('vconsole')
+  // import('./mock')
+  //   .then(module => {
+  //     module.initMock()
+  //   }).catch(err => {
+  //     console.log('mock-error', err);
+  //   })
+  if(checkInRealMobile()) {
+    import('vconsole')
     .then(log => {
-      checkInRealMobile() && new log.default()
+       new log.default()
     })
     .catch(err => {
       console.log('log-err', err);
     })
+  }
+  
 }
 
 

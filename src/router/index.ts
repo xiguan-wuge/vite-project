@@ -61,7 +61,12 @@ const list = [
     path: '/i18n',
     name: 'I18n',
     component: I18n
-  }
+  },
+  {
+    path: '/largeFileUpload',
+    name: 'LargeFileUpload',
+    component: () => import('@/components/largeFileUpload/fileUpload.vue')
+  },
 ]
 
 const router = createRouter({
