@@ -9,8 +9,8 @@
     "build:no-check": "vite build",
     "preview": "vite preview",
     "largeFileUpload": "npm start & nodemon server/largeFileServer/server.js",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest --coverage",
-    "prepare": "husky",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --coverage",
+    "prepare": "husky init",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
   },
   "dependencies": {
@@ -27,6 +27,7 @@
   "devDependencies": {
     "@types/node": "^18.14.0",
     "@vitejs/plugin-vue": "^2.3.3",
+    "cross-env": "^7.0.3",
     "fs-extra": "^11.1.0",
     "husky": "^9.1.7",
     "less": "^4.1.3",
