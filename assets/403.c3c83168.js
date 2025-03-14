@@ -1,0 +1,1 @@
+import{d as t,a,c as n,g as e,b as o}from"./index.1b73f85f.js";const B=t({__name:"403",setup(r){return(s,u)=>(a(),n("div",null,u[0]||(u[0]=[e("\u62B1\u6B49\uFF0C\u60A8\u6CA1\u6709\u8BBF\u95EE\u6743\u9650"),o("br",null,null,-1),e("\u8BF7\u8FD4\u56DE\u4E0A\u4E00\u7EA7")])))}});export{B as default};
